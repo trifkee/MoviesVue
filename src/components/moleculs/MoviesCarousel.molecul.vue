@@ -1,12 +1,12 @@
 <script setup lang="ts">
-type CarouseType = {
+type CarouseTypel = {
   data: MovieType[] | undefined;
   isLoading: Boolean;
   title: string;
   isLive?: Boolean;
 };
 
-defineProps<CarouseType>();
+defineProps<CarouseTypel>();
 
 import MovieCard from "@/components/atoms/MovieCard.atom.vue";
 import MovieCardSkeleton from "../atoms/MovieCardSkeleton.atom.vue";

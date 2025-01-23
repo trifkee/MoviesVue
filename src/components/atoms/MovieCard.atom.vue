@@ -7,6 +7,7 @@ defineProps<{
 import type { MovieType } from "@/lib/types/movies";
 
 import "@/styles/atoms/movieCard.atom.scss";
+import { RouterLink } from "vue-router";
 
 const imagePath = import.meta.env.VITE_TMDB_IMAGE_URL;
 
@@ -27,19 +28,22 @@ function getMovieRatingColor(score: number) {
 </script>
 
 <template>
-  <article
-    class="movie-card"
-    :style="`--movie-image: url(${imagePath}${movie.poster_path});
-     --score-percentage:${getScore(movie.vote_average)}%;
-     --border-clr:${getMovieRatingColor(movie.vote_average)}
-     `"
-  >
-    <div
-      class="movie-card__score"
-      :data-score="movie.vote_average.toFixed(1)"
-    ></div>
-    <p class="movie-card__title">{{ movie.title }}</p>
-  </article>
+  <RouterLink :to="`/movies/${movie.id}`" :key="movie.id">
+    <article
+      class="movie-card"
+      :style="`
+        --movie-image: url(${imagePath}${movie.poster_path});
+        --score-percentage:${getScore(movie.vote_average)}%;
+        --border-clr:${getMovieRatingColor(movie.vote_average)}
+        `"
+    >
+      <div
+        class="movie-card__score"
+        :data-score="movie.vote_average.toFixed(1)"
+      ></div>
+      <p class="movie-card__title">{{ movie.title }}</p>
+    </article>
+  </RouterLink>
 </template>
 
 <style lang="scss" scoped></style>

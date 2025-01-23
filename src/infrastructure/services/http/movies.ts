@@ -20,3 +20,15 @@ export const getTopRatedShows = async () => {
 export const getCurrentlyOnAir = async () => {
   return axiosInstance.get("/tv/on_the_air");
 };
+
+export const getSingleMovie = async (id: string) => {
+  return axiosInstance.get(`/movie/${id}`);
+};
+
+export const getSingleMovieRecommendations = async (id: string) => {
+  return axiosInstance.get(`/movie/${id}/recommendations`);
+};
+
+export const getSingleMovieVideos = async (id: string) => {
+  return axiosInstance.get(`/movie/${id}/videos`);
+};

@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { getPopularMovies } from "@/infrastructure/services/http/movies";
+import { computed } from "vue";
+
 import type { MovieType } from "@/lib/types/movies";
-import { useQuery } from "@tanstack/vue-query";
-import MoviesCarouselMolecul from "./MoviesCarousel.molecul.vue";
 
 import "@/styles/molecul/featuredMovie.molecul.scss";
-import { computed, ref } from "vue";
 
 const props = defineProps<{
   movie: MovieType | null;

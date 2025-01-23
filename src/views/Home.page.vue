@@ -1,22 +1,24 @@
 <script setup lang="ts">
-import { onUnmounted, ref, watch } from "vue";
+// Imports
+import { onMounted, onUnmounted, ref, watch } from "vue";
 
 import FeaturedMovie from "@/components/moleculs/FeaturedMovie.molecul.vue";
 import MoviesCarousel from "@/components/moleculs/MoviesCarousel.molecul.vue";
+import GenresCarousel from "@/components/moleculs/GenresCarousel.molecul.vue";
+import ShowCarousel from "@/components/moleculs/ShowCarousel.molecul.vue";
 
 import {
   useFetchMoviesGenres,
   useFetchPopularMovies,
 } from "@/infrastructure/queries/movies/useFetchMovies";
-
-import type { MovieType } from "@/lib/types/movies";
 import {
   useFetchCurrentlyOnAirShows,
   useFetchTopRatedShows,
 } from "@/infrastructure/queries/shows/useFetchShows";
-import GenresCarousel from "@/components/moleculs/GenresCarousel.molecul.vue";
-import ShowCarousel from "@/components/moleculs/ShowCarousel.molecul.vue";
 
+import type { MovieType } from "@/lib/types/movies";
+
+// Logic
 const featuredMovie = ref<MovieType | null>(null);
 
 const { data: popularMovies, isLoading: popularLoading } =
@@ -36,8 +38,13 @@ watch(popularMovies, handleChangeFeaturedMovie);
 let interval: number;
 
 function handleChangeFeaturedMovie() {
+  if (!popularMovies.value) {
+    featuredMovie.value = null;
+    return;
+  }
+
   if (!featuredMovie.value) {
-    featuredMovie.value = popularMovies.value![0];
+    featuredMovie.value = popularMovies.value[0];
     return handleChangeFeaturedMovie();
   }
 
@@ -50,13 +57,21 @@ function handleChangeFeaturedMovie() {
   }, 5000));
 }
 
+onMounted(() => {
+  handleChangeFeaturedMovie();
+});
+
 onUnmounted(() => {
   clearInterval(interval);
 });
 </script>
 
 <template>
-  <FeaturedMovie :movie="featuredMovie" :isLoading="popularLoading" />
+  <FeaturedMovie
+    :key="featuredMovie?.id"
+    :movie="featuredMovie"
+    :isLoading="popularLoading"
+  />
 
   <div class="carousels">
     <MoviesCarousel
