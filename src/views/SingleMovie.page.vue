@@ -4,6 +4,7 @@ import { onMounted, onUnmounted, ref } from "vue";
 import { useRoute } from "vue-router";
 
 import MoviesCarousel from "@/components/moleculs/MoviesCarousel.molecul.vue";
+import CardScoreAtom from "@/components/atoms/CardScore.atom.vue";
 
 import {
   useFetchSingleMovie,
@@ -68,11 +69,11 @@ const date = dayjs(movie?.value?.release_date).format("DD.MM.YYYY");
         </div>
 
         <div class="additional-info">
-          <div>
+          <div class="additional-info__info">
             <p>
               {{ date }}
             </p>
-            <p>{{ movie?.vote_average }}</p>
+            <CardScoreAtom :voteCount="movie?.vote_average" />
           </div>
           <div class="additional-info__genres">
             <p v-for="genre in movie?.genres" :key="genre.id">
@@ -200,12 +201,14 @@ const date = dayjs(movie?.value?.release_date).format("DD.MM.YYYY");
       gap: 2rem;
       font-size: clamp(1rem, 2vw, 1.25rem);
 
-      & > div {
+      &__info {
         display: flex;
-        gap: 0.5rem;
+        align-items: center;
+        gap: 2rem;
       }
 
       &__genres {
+        gap: 0.5rem;
         display: flex;
 
         & > p {
