@@ -1,0 +1,68 @@
+.nav {
+  background: #021526;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid rgb(110, 172, 218, 0.35);
+
+  &__logo {
+    color: white;
+    max-width: 12rem;
+  }
+
+  &__links {
+    display: flex;
+    gap: 1rem;
+
+    .link {
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      color: white;
+    }
+  }
+
+  &__search {
+    display: flex;
+    position: relative;
+    border-radius: 0.65rem;
+    overflow: hidden;
+    max-width: 380px;
+    width: 100%;
+    outline: 2px solid rgb(110, 172, 218, 0.35);
+    box-shadow: 0 12px 150px -2px rgb(110, 172, 218, 0);
+    transition: 0.2s ease all;
+
+    &:has(.input:focus) {
+      box-shadow: 0 12px 150px -2px rgb(110, 172, 218, 0.35);
+    }
+
+    .input {
+      border: none;
+      background-image: linear-gradient(45deg, #042746, #092136);
+      width: 100%;
+      padding: 0.85rem 1rem;
+      outline: none;
+      color: white;
+
+      &::placeholder {
+        color: rgb(255, 255, 255, 0.5);
+      }
+    }
+
+    .cta {
+      background-color: transparent;
+      height: 80%;
+      aspect-ratio: 1;
+      right: 0%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      border: none;
+      border-radius: 0.25rem;
+      cursor: pointer;
+    }
+  }
+}
