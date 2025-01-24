@@ -6,6 +6,8 @@ import type { MovieType } from "@/lib/types/movies";
 
 import "@/styles/molecul/trendingMovie.molecul.scss";
 import { useFetchTrendingMovies } from "@/infrastructure/queries/movies/useFetchMovies";
+import ButtonAtom from "../atoms/button.atom.vue";
+import { ChevronRight } from "lucide-vue-next";
 
 const path = import.meta.env.VITE_TMDB_IMAGE_URL;
 
@@ -52,9 +54,9 @@ const { data: trendingMovies, isLoading: isLoadingTrending } =
         <p>{{ singleMovie.overview }}</p>
 
         <div class="links">
-          <RouterLink :to="`/movies/${singleMovie.id}`" class="movie"
-            >Go to Movie</RouterLink
-          >
+          <ButtonAtom class="movie" :to="`/movies/${singleMovie.id}`"
+            >Go to movie <ChevronRight class="svg" />
+          </ButtonAtom>
           <!-- <RouterLink to="#" class="website">Check original page</RouterLink> -->
         </div>
       </div>
