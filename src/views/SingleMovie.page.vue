@@ -5,31 +5,25 @@ import { useRoute } from "vue-router";
 
 import MoviesCarousel from "@/components/moleculs/MoviesCarousel.molecul.vue";
 import CardScoreAtom from "@/components/atoms/CardScore.atom.vue";
+import SingleMovieSkeletonAtom from "@/components/atoms/SingleMovieSkeleton.atom.vue";
+import MovieTabsOrganism from "@/components/organism/MovieTabs.organism.vue";
 
 import {
   useFetchSingleMovie,
-  useFetchSingleMovieCredits,
-  useFetchSingleMovieImages,
   useFetchSingleMovieRecommendations,
-  // useFetchSingleMovieVideos,
 } from "@/infrastructure/queries/movies/useFetchMovies";
 
 import "@/styles/views/singleMovie.view.scss";
-import SingleMovieSkeletonAtom from "@/components/atoms/SingleMovieSkeleton.atom.vue";
-import type { SingleMovieCastType } from "@/lib/types/movies";
-import ActorCardSmallAtom from "@/components/atoms/ActorCardSmall.atom.vue";
-import MovieTabsOrganism from "@/components/organism/MovieTabs.organism.vue";
 
 const route = useRoute();
 
-let id = ref(route.params.id);
+const id = ref(route.params.id);
 
 const { data: movie, isLoading: isMovieLoading } = useFetchSingleMovie(
   id.value as string
 );
 const { data: recommendations, isLoading: recommendationsLoading } =
   useFetchSingleMovieRecommendations(id.value as string);
-// const { data: videos } = useFetchSingleMovieVideos(id.value as string);
 
 const shouldDisplayVideo = ref(false);
 
@@ -99,15 +93,3 @@ const date = dayjs(movie?.value?.release_date).format("DD.MM.YYYY");
     title="You may also like"
   />
 </template>
-
-<!-- <div v-if="!videos?.[videos.length - 2]?.key" class="single-movie__video">
-        <iframe
-          id="ytplayer"
-          type="text/html"
-          :src="`https://www.youtube.com/embed/${
-            videos?.[videos.length - 2]?.key
-          }?autoplay=1&controls=0&disablekb=1&modestbranding=1&color=white`"
-          frameborder="0"
-          allowfullscreen
-        ></iframe>
-      </div> -->

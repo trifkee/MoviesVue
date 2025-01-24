@@ -1,18 +1,15 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import { RouterLink } from "vue-router";
+import ButtonAtom from "../atoms/Button.atom.vue";
 
-import type { MovieType } from "@/lib/types/movies";
+import { useFetchTrendingMovies } from "@/infrastructure/queries/movies/useFetchMovies";
+
+import { ChevronRight } from "lucide-vue-next";
 
 import "@/styles/molecul/trendingMovie.molecul.scss";
-import { useFetchTrendingMovies } from "@/infrastructure/queries/movies/useFetchMovies";
-import ButtonAtom from "../atoms/button.atom.vue";
-import { ChevronRight } from "lucide-vue-next";
 
 const path = import.meta.env.VITE_TMDB_IMAGE_URL;
 
-const { data: trendingMovies, isLoading: isLoadingTrending } =
-  useFetchTrendingMovies();
+const { data: trendingMovies } = useFetchTrendingMovies();
 
 // let singleMovie = ref<MovieType>({
 //   adult: false,
@@ -45,8 +42,8 @@ const { data: trendingMovies, isLoading: isLoadingTrending } =
   <div class="trending-carousel">
     <article
       v-for="singleMovie in trendingMovies"
-      v
       class="trending-movie"
+      :key="singleMovie.id"
       :style="`--bg-image:url(${path}${singleMovie?.backdrop_path})`"
     >
       <div class="trending-movie__info">

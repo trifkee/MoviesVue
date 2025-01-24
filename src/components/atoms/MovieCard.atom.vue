@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   movie: MovieType;
-  isLive?: Boolean;
+  isLive?: boolean;
 }>();
 
 import type { MovieType } from "@/lib/types/movies";

@@ -1,12 +1,13 @@
 <script setup lang="ts">
+import { useRoute } from "vue-router";
+import { ref, type Ref } from "vue";
+
+import ActorCardSmallAtom from "../atoms/ActorCardSmall.atom.vue";
+
 import {
   useFetchSingleMovieCredits,
   useFetchSingleMovieImages,
 } from "@/infrastructure/queries/movies/useFetchMovies";
-import ActorCardSmallAtom from "../atoms/ActorCardSmall.atom.vue";
-import { onMounted, watch, type Ref } from "vue";
-import { ref } from "vue";
-import { useRoute } from "vue-router";
 
 const route = useRoute();
 
@@ -39,12 +40,8 @@ function handleTabChange(selectedTab: TabType) {
   }
 }
 
-const { data: credits, isLoading: isCreditsLoading } =
-  useFetchSingleMovieCredits(route.params.id as string);
-
-const { data: images, isLoading: isImagesLoading } = useFetchSingleMovieImages(
-  route.params.id as string
-);
+const { data: credits } = useFetchSingleMovieCredits(route.params.id as string);
+const { data: images } = useFetchSingleMovieImages(route.params.id as string);
 
 const path = import.meta.env.VITE_TMDB_IMAGE_URL;
 </script>

@@ -3,7 +3,7 @@ import CardScoreAtom from "./CardScore.atom.vue";
 
 defineProps<{
   show: ShowType;
-  isLive?: Boolean;
+  isLive?: boolean;
 }>();
 
 import type { ShowType } from "@/lib/types/movies";

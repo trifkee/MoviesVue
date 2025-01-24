@@ -4,7 +4,6 @@ import {
   getMovies,
   getMoviesGenres,
   getPopularMovies,
-  getSingleActorImages,
   getSingleMovie,
   getSingleMovieCredits,
   getSingleMovieImages,

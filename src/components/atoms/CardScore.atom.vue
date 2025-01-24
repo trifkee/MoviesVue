@@ -6,8 +6,7 @@ defineProps({
 });
 
 function getScore(score: number) {
-  // @ts-expect-error
-  return score.toFixed(1) * 10;
+  return Number(score.toFixed(1)) * 10;
 }
 </script>
 

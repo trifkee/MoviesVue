@@ -1,7 +1,7 @@
 <script setup lang="ts">
 type CarouselType = {
   data: GenreListType | undefined;
-  isLoading: Boolean;
+  isLoading: boolean;
   title: string;
 };
 
@@ -18,7 +18,7 @@ import "@/styles/molecul/movieCarousel.molecul.scss";
     <h2 class="movie-carousel__title">{{ title }}</h2>
 
     <div class="movie-carousel__container">
-      <GenreCard v-for="genre in data" :genre="genre" />
+      <GenreCard :key="genre.id" v-for="genre in data" :genre="genre" />
     </div>
   </article>
 </template>

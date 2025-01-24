@@ -1,9 +1,9 @@
 <script setup lang="ts">
 type CarouseTypel = {
   data: MovieType[] | undefined;
-  isLoading: Boolean;
+  isLoading: boolean;
   title: string;
-  isLive?: Boolean;
+  isLive?: boolean;
 };
 
 defineProps<CarouseTypel>();
