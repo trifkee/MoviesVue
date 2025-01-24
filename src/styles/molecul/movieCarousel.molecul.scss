@@ -3,6 +3,10 @@
   flex-direction: column;
   gap: 1rem;
 
+  &:is(:last-child) {
+    margin-bottom: 2rem;
+  }
+
   &__title {
     color: white;
     font-size: clamp(1.25rem, 2vw, 1.5rem);

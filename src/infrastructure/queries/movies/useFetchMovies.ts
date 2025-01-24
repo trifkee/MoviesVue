@@ -4,15 +4,22 @@ import {
   getMovies,
   getMoviesGenres,
   getPopularMovies,
+  getSingleActorImages,
   getSingleMovie,
+  getSingleMovieCredits,
+  getSingleMovieImages,
   getSingleMovieRecommendations,
   getSingleMovieVideos,
+  getTrendingMovies,
 } from "../../services/http/movies";
+
 import type {
   MoviesType,
   MovieType,
+  SingleMovieCastType,
   SingleMovieType,
 } from "@/lib/types/movies";
+
 import type { AxiosError } from "axios";
 
 export const useFetchMovies = () => {
@@ -64,5 +71,33 @@ export const useFetchSingleMovieVideos = (id: string) => {
     queryKey: ["singleMovieVideos", id],
     queryFn: () => getSingleMovieVideos(id),
     select: (data) => data.data.results,
+  });
+};
+
+export const useFetchSingleMovieImages = (id: string) => {
+  return useQuery({
+    queryKey: ["singleMovieImages", id],
+    queryFn: () => getSingleMovieImages(id),
+    select: (data) => data.data.backdrops,
+    enabled: !!id,
+  });
+};
+
+export const useFetchSingleMovieCredits = (
+  id: string
+): UseQueryReturnType<SingleMovieCastType[], AxiosError> => {
+  return useQuery({
+    queryKey: ["singleMovieCredits", id],
+    queryFn: () => getSingleMovieCredits(id),
+    select: (data) => data.data.cast,
+    enabled: !!id,
+  });
+};
+
+export const useFetchTrendingMovies = () => {
+  return useQuery({
+    queryKey: ["trendingMovies"],
+    queryFn: () => getTrendingMovies(),
+    select: (data) => data.data.results as MovieType[],
   });
 };

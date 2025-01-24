@@ -32,3 +32,19 @@ export const getSingleMovieRecommendations = async (id: string) => {
 export const getSingleMovieVideos = async (id: string) => {
   return axiosInstance.get(`/movie/${id}/videos`);
 };
+
+export const getSingleMovieImages = async (id: string) => {
+  return axiosInstance.get(`/movie/${id}/images`);
+};
+
+export const getSingleMovieCredits = async (id: string) => {
+  return axiosInstance.get(`/movie/${id}/credits`);
+};
+
+export const getSingleActorImages = async (id: number) => {
+  return axiosInstance.get(`/person/${id}/images`);
+};
+
+export const getTrendingMovies = async () => {
+  return axiosInstance.get("/trending/movie/week");
+};

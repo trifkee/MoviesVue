@@ -6,6 +6,7 @@ import FeaturedMovie from "@/components/moleculs/FeaturedMovie.molecul.vue";
 import MoviesCarousel from "@/components/moleculs/MoviesCarousel.molecul.vue";
 import GenresCarousel from "@/components/moleculs/GenresCarousel.molecul.vue";
 import ShowCarousel from "@/components/moleculs/ShowCarousel.molecul.vue";
+import TrendingMoviesMolecul from "@/components/moleculs/TrendingMovies.molecul.vue";
 
 import {
   useFetchMoviesGenres,
@@ -85,6 +86,8 @@ onUnmounted(() => {
       :isLoading="isMovieGenresLoading"
     />
 
+    <TrendingMoviesMolecul />
+
     <ShowCarousel
       :data="topRatedShows!"
       :isLoading="topShowsLoading"
@@ -104,7 +107,7 @@ onUnmounted(() => {
 .carousels {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 2rem;
   padding-bottom: 2rem;
 }
 </style>

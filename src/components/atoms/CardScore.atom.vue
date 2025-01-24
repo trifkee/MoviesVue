@@ -32,7 +32,7 @@ function getScore(score: number) {
   width: 3rem;
   aspect-ratio: 1;
   box-shadow: 0 12px 150px -2px rgb(110, 172, 218, 0.35);
-
+  outline: 3px solid #333;
   background: red;
   font-weight: bold;
   background: conic-gradient(
