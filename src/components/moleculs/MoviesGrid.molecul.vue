@@ -16,18 +16,26 @@ const {
   isFetching,
 } = useFetchMoviesWithGenresInf(genreId);
 
-const t = computed(() =>
+watch(
+  () => route.query.genre,
+  (newGenre) => {
+    genreId.value = newGenre as string;
+  },
+  { immediate: true }
+);
+
+const movies = computed(() =>
   genreMoviesInf.value?.pages.flatMap((n) => n.data.results)
 );
 
-const e = ref<HTMLElement | null>(null);
+const loaderRef = ref<HTMLElement | null>(null);
 
 onMounted(() => {
-  if (!e.value) return;
+  if (!loaderRef.value) return;
 
   const observer = new IntersectionObserver(
     ([entry]) => {
-      if (entry.isIntersecting && !isFetching) {
+      if (entry.isIntersecting && !isFetching.value) {
         fetchNextPage();
       }
     },
@@ -36,15 +44,15 @@ onMounted(() => {
     }
   );
 
-  observer.observe(e.value);
+  observer.observe(loaderRef.value);
 });
 </script>
 
 <template>
   <div class="movie-grid">
-    <MovieCardAtom v-for="movie in t" :key="movie.id" :movie="movie" />
+    <MovieCardAtom v-for="movie in movies" :key="movie.id" :movie="movie" />
   </div>
-  <div ref="e" class="loading"><span class="loader"></span></div>
+  <div ref="loaderRef" class="loading"><span class="loader"></span></div>
   <RouterView :key="$route.fullPath" />
 </template>
 

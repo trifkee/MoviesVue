@@ -6,15 +6,18 @@
   display: flex;
   height: 4.5rem;
   justify-content: space-between;
-  background: transparent;
   backdrop-filter: blur(0px);
   transition: 0.5s ease all;
-  border-bottom: 1px solid transparent;
+  background-image: linear-gradient(
+    0deg,
+    rgb(0, 0, 0, 0),
+    rgb(0, 0, 0, 0.5) 90%
+  );
 
   &.scrolled {
     background: rgb(2, 21, 38, 0.65);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgb(110, 172, 218, 0.35);
+    // border-bottom: 1px solid rgb(110, 172, 218, 0.35);
   }
 
   .ctas {
@@ -52,7 +55,7 @@
 
     &:has(> *:hover) {
       *:not(:hover) {
-        opacity: 0.2;
+        opacity: 0.5;
       }
     }
 
