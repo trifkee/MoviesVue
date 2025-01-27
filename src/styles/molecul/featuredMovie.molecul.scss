@@ -30,7 +30,7 @@
     justify-content: space-between;
 
     & > * {
-      opacity: 0.5;
+      opacity: 0.25;
       padding: 1rem;
       transition: 0.2s ease all;
       cursor: pointer;
@@ -50,6 +50,12 @@
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+    opacity: 1;
+
+    &.fade {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
 
     .poster {
       outline: 2px solid rgb(255, 255, 255, 0.1);
@@ -102,7 +108,7 @@
       height: 0.65rem;
       aspect-ratio: 1;
       scale: 0.6;
-      transition: 0.25s ease all;
+      transition: 0.5s ease all;
 
       &:has(+ .active) {
         scale: 0.95;

@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from "vue";
+import {
+  computed,
+  onBeforeUpdate,
+  onMounted,
+  onUnmounted,
+  onUpdated,
+  ref,
+  watch,
+} from "vue";
 
 import type { MovieType } from "@/lib/types/movies";
 
@@ -7,14 +15,17 @@ import "@/styles/molecul/featuredMovie.molecul.scss";
 import { useFetchPopularMovies } from "@/infrastructure/queries/movies/useFetchMovies";
 import { ChevronLeft, ChevronRight } from "lucide-vue-next";
 
-const { data: popularMovies, isLoading: popularLoading } =
-  useFetchPopularMovies();
+const props = defineProps<{
+  popularMovies: MovieType[];
+  popularLoading: boolean;
+}>();
 
 const path = import.meta.env.VITE_TMDB_IMAGE_URL;
+let interval: number;
 
 const featuredMovie = ref<MovieType | null>(null);
-
-const slicedMovies = computed(() => popularMovies.value?.slice(0, 7));
+const shouldUpdate = ref(false);
+const slicedMovies = computed(() => props.popularMovies?.slice(0, 7));
 const bgImageStyle = computed(() => {
   return `--bg-image:url(${path}${
     featuredMovie.value?.backdrop_path
@@ -22,28 +33,20 @@ const bgImageStyle = computed(() => {
 });
 const currIndex = ref(0);
 
-watch(popularMovies, handleChangeFeaturedMovie);
-
-let interval: number;
+watch(() => props.popularMovies, handleChangeFeaturedMovie);
 
 function handleChangeFeaturedMovie() {
-  if (!popularMovies.value) {
-    featuredMovie.value = null;
-    return;
+  if (featuredMovie.value === null) {
+    featuredMovie.value = slicedMovies.value[0];
   }
 
-  if (!featuredMovie.value) {
-    featuredMovie.value = popularMovies.value[0];
-    return handleChangeFeaturedMovie();
-  }
-
-  return (interval = setInterval(() => {
+  interval = setInterval(() => {
     if (slicedMovies.value) {
       const nextIndex = (currIndex.value + 1) % slicedMovies.value.length;
       featuredMovie.value = slicedMovies.value[nextIndex];
       currIndex.value = nextIndex;
     }
-  }, 5000));
+  }, 5000);
 }
 
 function handleChangeMovieLeft() {
@@ -74,13 +77,12 @@ function handleChangeMovieRight() {
     clearInterval(interval);
     handleChangeFeaturedMovie();
   } else {
-    featuredMovie.value = null;
     currIndex.value = 0;
+    featuredMovie.value = slicedMovies.value?.[0];
     clearInterval(interval);
     handleChangeFeaturedMovie();
   }
 }
-
 onMounted(() => {
   handleChangeFeaturedMovie();
 });
@@ -101,7 +103,7 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <div class="featured-movie__info">
+    <div :class="`featured-movie__info ${shouldUpdate ? 'fade' : ''}`">
       <img
         class="poster"
         :src="`${path}${featuredMovie?.poster_path}`"

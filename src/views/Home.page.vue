@@ -34,7 +34,10 @@ const { data: movieGenres, isLoading: isMovieGenresLoading } =
 </script>
 
 <template>
-  <FeaturedMovie />
+  <FeaturedMovie
+    :popularLoading="popularLoading"
+    :popularMovies="popularMovies ?? []"
+  />
 
   <div class="carousels">
     <MoviesCarousel

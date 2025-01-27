@@ -8,12 +8,12 @@
   justify-content: space-between;
   background: transparent;
   backdrop-filter: blur(0px);
-  transition: 0.2s ease all;
+  transition: 0.5s ease all;
   border-bottom: 1px solid transparent;
 
   &.scrolled {
-    background: rgb(2, 21, 38, 0.2);
-    backdrop-filter: blur(3px);
+    background: rgb(2, 21, 38, 0.65);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid rgb(110, 172, 218, 0.35);
   }
 
