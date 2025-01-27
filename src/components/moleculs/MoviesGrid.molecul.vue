@@ -57,8 +57,18 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div class="card-grid" :style="`${isFetching ? 'max-height:20vh;' : ''}`">
-    <MovieCardSkeletonAtom v-if="isFetching" v-for="i in 16" />
+  <div
+    class="card-grid"
+    :style="`${
+      isFetching && genreMoviesInf?.pageParams.length === 1
+        ? 'max-height:30dvh'
+        : ''
+    }`"
+  >
+    <MovieCardSkeletonAtom
+      v-if="isFetching && genreMoviesInf?.pageParams.length === 1"
+      v-for="i in 16"
+    />
     <MovieCardAtom v-for="movie in movies" :key="movie.id" :movie="movie" />
   </div>
   <div ref="loaderRef" class="loading">
