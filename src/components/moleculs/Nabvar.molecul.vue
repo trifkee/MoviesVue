@@ -3,10 +3,13 @@ import { RouterLink } from "vue-router";
 import { Bookmark, Search, UserCircle } from "lucide-vue-next";
 
 import "@/styles/molecul/navbar.molecul.scss";
+import { inject } from "vue";
+
+const scrollY = inject("scrollY", 0);
 </script>
 
 <template>
-  <nav class="nav">
+  <nav ref="navRef" :class="`nav ${scrollY > 300 ? 'scrolled' : ''}`">
     <!-- <img class="nav__logo" src="../../assets/images/logo.svg" alt="logo" /> -->
 
     <div class="nav__links">

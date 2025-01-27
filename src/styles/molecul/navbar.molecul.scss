@@ -3,12 +3,19 @@
   position: fixed;
   top: 0;
   z-index: 9;
-  background: rgb(2, 21, 38, 0.2);
-  backdrop-filter: blur(6px);
   display: flex;
   height: 4.5rem;
   justify-content: space-between;
-  border-bottom: 1px solid rgb(110, 172, 218, 0.35);
+  background: transparent;
+  backdrop-filter: blur(0px);
+  transition: 0.2s ease all;
+  border-bottom: 1px solid transparent;
+
+  &.scrolled {
+    background: rgb(2, 21, 38, 0.2);
+    backdrop-filter: blur(3px);
+    border-bottom: 1px solid rgb(110, 172, 218, 0.35);
+  }
 
   .ctas {
     position: absolute;

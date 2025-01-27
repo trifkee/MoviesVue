@@ -20,59 +20,21 @@ import {
 import type { MovieType } from "@/lib/types/movies";
 
 // Logic
-const featuredMovie = ref<MovieType | null>(null);
+const { data: topRatedShows, isLoading: topShowsLoading } =
+  useFetchTopRatedShows();
 
 const { data: popularMovies, isLoading: popularLoading } =
   useFetchPopularMovies();
-
-const { data: topRatedShows, isLoading: topShowsLoading } =
-  useFetchTopRatedShows();
 
 const { data: onAirShows, isLoading: isLoadingOnAir } =
   useFetchCurrentlyOnAirShows();
 
 const { data: movieGenres, isLoading: isMovieGenresLoading } =
   useFetchMoviesGenres();
-
-watch(popularMovies, handleChangeFeaturedMovie);
-
-let interval: number;
-
-function handleChangeFeaturedMovie() {
-  if (!popularMovies.value) {
-    featuredMovie.value = null;
-    return;
-  }
-
-  if (!featuredMovie.value) {
-    featuredMovie.value = popularMovies.value[0];
-    return handleChangeFeaturedMovie();
-  }
-
-  return (interval = setInterval(() => {
-    if (popularMovies.value) {
-      const randInt = Math.floor(Math.random() * popularMovies.value.length);
-
-      featuredMovie.value = popularMovies.value[randInt];
-    }
-  }, 5000));
-}
-
-onMounted(() => {
-  handleChangeFeaturedMovie();
-});
-
-onUnmounted(() => {
-  clearInterval(interval);
-});
 </script>
 
 <template>
-  <FeaturedMovie
-    :key="featuredMovie?.id"
-    :movie="featuredMovie"
-    :isLoading="popularLoading"
-  />
+  <FeaturedMovie />
 
   <div class="carousels">
     <MoviesCarousel
