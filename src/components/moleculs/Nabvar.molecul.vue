@@ -20,9 +20,9 @@ const scrollY = inject("scrollY", 0);
     </div>
 
     <div class="ctas">
-      <button class="search">
+      <RouterLink to="/search">
         <Search :size="28" stroke-width="1.5" color="white" />
-      </button>
+      </RouterLink>
       <button class="bookmar">
         <Bookmark :size="28" stroke-width="1.5" color="white" />
       </button>

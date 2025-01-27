@@ -1,19 +1,11 @@
 <script setup lang="ts">
-import {
-  computed,
-  onBeforeUpdate,
-  onMounted,
-  onUnmounted,
-  onUpdated,
-  ref,
-  watch,
-} from "vue";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 
 import type { MovieType } from "@/lib/types/movies";
 
-import "@/styles/molecul/featuredMovie.molecul.scss";
-import { useFetchPopularMovies } from "@/infrastructure/queries/movies/useFetchMovies";
 import { ChevronLeft, ChevronRight } from "lucide-vue-next";
+
+import "@/styles/molecul/featuredMovie.molecul.scss";
 
 const props = defineProps<{
   popularMovies: MovieType[];
@@ -25,15 +17,14 @@ let interval: number;
 
 const featuredMovie = ref<MovieType | null>(null);
 const shouldUpdate = ref(false);
+const currIndex = ref(0);
+
 const slicedMovies = computed(() => props.popularMovies?.slice(0, 7));
 const bgImageStyle = computed(() => {
   return `--bg-image:url(${path}${
     featuredMovie.value?.backdrop_path
   }); opacity: ${featuredMovie.value ? 1 : 0};`;
 });
-const currIndex = ref(0);
-
-watch(() => props.popularMovies, handleChangeFeaturedMovie);
 
 function handleChangeFeaturedMovie() {
   if (featuredMovie.value === null) {
@@ -83,6 +74,9 @@ function handleChangeMovieRight() {
     handleChangeFeaturedMovie();
   }
 }
+
+watch(() => props.popularMovies, handleChangeFeaturedMovie);
+
 onMounted(() => {
   handleChangeFeaturedMovie();
 });

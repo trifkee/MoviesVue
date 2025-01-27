@@ -4,7 +4,7 @@ import { VueQueryDevtools } from "@tanstack/vue-query-devtools";
 import Nabvar from "./components/moleculs/Nabvar.molecul.vue";
 
 import Lenis from "lenis";
-import { onBeforeMount, onMounted, provide, ref, watch } from "vue";
+import { onBeforeMount, onMounted, provide, ref } from "vue";
 
 const scrollY = ref(0);
 

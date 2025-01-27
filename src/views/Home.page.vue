@@ -1,7 +1,5 @@
 <script setup lang="ts">
 // Imports
-import { onMounted, onUnmounted, ref, watch } from "vue";
-
 import FeaturedMovie from "@/components/moleculs/FeaturedMovie.molecul.vue";
 import MoviesCarousel from "@/components/moleculs/MoviesCarousel.molecul.vue";
 import GenresCarousel from "@/components/moleculs/GenresCarousel.molecul.vue";
@@ -16,8 +14,6 @@ import {
   useFetchCurrentlyOnAirShows,
   useFetchTopRatedShows,
 } from "@/infrastructure/queries/shows/useFetchShows";
-
-import type { MovieType } from "@/lib/types/movies";
 
 // Logic
 const { data: topRatedShows, isLoading: topShowsLoading } =
