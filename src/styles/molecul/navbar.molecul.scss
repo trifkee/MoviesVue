@@ -67,6 +67,25 @@
       opacity: 1;
       transition: 0.2s ease opacity;
       // padding: 2rem 0.5rem;
+      &::before {
+        content: "";
+        width: 140%;
+        height: 70%;
+        border-radius: 160%;
+        filter: blur(12px);
+        top: -70%;
+        background: rgb(32, 108, 221, 1);
+        position: absolute;
+        display: none;
+      }
+
+      &.active {
+        position: relative;
+
+        &::before {
+          display: block;
+        }
+      }
     }
   }
 

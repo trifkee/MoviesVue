@@ -1,13 +1,38 @@
 <script setup lang="ts">
 import type { GenreType } from "@/lib/types/movies";
+import { ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
+// Props
 defineProps<{
   genre: GenreType;
 }>();
+
+// Router and route
+const router = useRouter();
+const route = useRoute();
+
+const genreId = ref(route.query.genre ?? null);
+
+watch(
+  () => route.query.genre,
+  (newGenreId, _oldGenreId) => {
+    genreId.value = newGenreId;
+  }
+);
+
+// Function to update the genre query parameter
+function handleQueryGenreParam(genre: string) {
+  router.push({ query: { genre } });
+}
 </script>
 
 <template>
-  <article class="genre-card">
+  <article
+    @click="handleQueryGenreParam(genre.id)"
+    :class="`genre-card 
+      ${genre.id == genreId ? 'active' : ''}`"
+  >
     <p class="genre-card__title">{{ genre.name }}</p>
   </article>
 </template>
@@ -22,10 +47,10 @@ defineProps<{
   padding: 0.85rem 1rem;
   color: white;
   cursor: pointer;
-
+  outline: 1px solid rgb(255, 255, 255, 0.1);
   &.active {
-    outline: 2px solid rgb(110, 172, 218, 0.35);
-    background-image: linear-gradient(45deg, #042746, #092136);
+    outline: 1px solid white;
+    // background-image: linear-gradient(45deg, #042746, #092136);
   }
 
   &:hover {

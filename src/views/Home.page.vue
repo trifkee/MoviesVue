@@ -24,9 +24,6 @@ const { data: popularMovies, isLoading: popularLoading } =
 
 const { data: onAirShows, isLoading: isLoadingOnAir } =
   useFetchCurrentlyOnAirShows();
-
-const { data: movieGenres, isLoading: isMovieGenresLoading } =
-  useFetchMoviesGenres();
 </script>
 
 <template>
@@ -40,11 +37,6 @@ const { data: movieGenres, isLoading: isMovieGenresLoading } =
       :data="popularMovies!"
       :isLoading="popularLoading"
       title="Popular Movies."
-    />
-    <GenresCarousel
-      title="Movies Genres."
-      :data="movieGenres"
-      :isLoading="isMovieGenresLoading"
     />
 
     <TrendingMoviesMolecul />

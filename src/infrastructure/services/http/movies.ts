@@ -48,3 +48,19 @@ export const getSingleActorImages = async (id: number) => {
 export const getTrendingMovies = async () => {
   return axiosInstance.get("/trending/movie/week");
 };
+
+export const getMoviesByGenre = async (genre: string) => {
+  return axiosInstance.get(`/discover/movie?with_genres=${genre}`);
+};
+
+export const getMoviesByGenreInf = async ({
+  genre,
+  page,
+}: {
+  genre: string;
+  page: number;
+}) => {
+  return axiosInstance.get(
+    `/discover/movie?${genre && `with_genres=${genre}`}&page=${page}`
+  );
+};

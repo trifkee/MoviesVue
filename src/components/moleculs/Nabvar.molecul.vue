@@ -1,11 +1,18 @@
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
+import { computed, inject } from "vue";
+import { RouterLink, useRoute } from "vue-router";
 import { Bookmark, Search, UserCircle } from "lucide-vue-next";
 
 import "@/styles/molecul/navbar.molecul.scss";
-import { inject } from "vue";
+import { routes } from "@/lib/constants/mainRoutes";
 
 const scrollY = inject("scrollY", 0);
+
+const route = useRoute();
+
+const currentRoute = computed(() =>
+  routes.findIndex((n) => n.name.toLowerCase() === route.name)
+);
 </script>
 
 <template>
@@ -13,9 +20,13 @@ const scrollY = inject("scrollY", 0);
     <!-- <img class="nav__logo" src="../../assets/images/logo.svg" alt="logo" /> -->
 
     <div class="nav__links">
-      <RouterLink class="link" to="/">Home</RouterLink>
-      <RouterLink class="link" to="/">Movies</RouterLink>
-      <RouterLink class="link" to="/">TV Series</RouterLink>
+      <RouterLink
+        v-for="link in routes"
+        :key="link.path"
+        :class="`link  ${link.id === currentRoute ? 'active' : ''}`"
+        :to="link.path"
+        >{{ link.name }}</RouterLink
+      >
       <!-- <RouterLink class="link" to="/"></RouterLink> -->
     </div>
 

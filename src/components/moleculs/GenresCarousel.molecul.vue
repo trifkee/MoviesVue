@@ -5,7 +5,7 @@ type CarouselType = {
   title: string;
 };
 
-defineProps<CarouselType>();
+const props = defineProps<CarouselType>();
 
 import GenreCard from "@/components/atoms/GenreCard.atom.vue";
 import type { GenreListType } from "@/lib/types/movies";
@@ -23,4 +23,8 @@ import "@/styles/molecul/movieCarousel.molecul.scss";
   </article>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.movie-carousel {
+  margin-bottom: 0 !important;
+}
+</style>
