@@ -16,8 +16,15 @@ import "@/styles/atoms/movieCard.atom.scss";
   border-radius: 0.5rem;
   background: rgb(110, 172, 218, 0.05);
   animation: skeletonPulse 1s both infinite;
+  position: relative;
 
   &__score {
+    position: absolute;
+    height: 3.5rem;
+    width: 3.5rem !important;
+    border-radius: 100%;
+    top: 0.5rem;
+    right: 0.5rem;
     background: rgb(110, 172, 218, 0.05);
     animation: skeletonPulse 1s both infinite;
     animation-delay: 0.1s;

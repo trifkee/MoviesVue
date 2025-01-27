@@ -37,42 +37,48 @@ function handleChangeFeaturedMovie() {
       featuredMovie.value = slicedMovies.value[nextIndex];
       currIndex.value = nextIndex;
     }
-  }, 5000);
+  }, 10000);
+}
+
+function resetTimer(interval: ReturnType<typeof setTimeout>) {
+  clearInterval(interval);
+  handleChangeFeaturedMovie();
 }
 
 function handleChangeMovieLeft() {
-  if (!slicedMovies.value) return;
+  if (!slicedMovies.value) {
+    resetTimer(interval);
+    return;
+  }
 
-  if (currIndex.value > 0) {
+  if (currIndex.value === 0) {
+    currIndex.value = slicedMovies.value.length - 1;
+    featuredMovie.value = slicedMovies.value[currIndex.value];
+  } else {
     const prevIndex = currIndex.value - 1;
     featuredMovie.value = slicedMovies.value?.[prevIndex];
     currIndex.value = prevIndex;
-    clearInterval(interval);
-    handleChangeFeaturedMovie();
-  } else {
-    const lastIndex = slicedMovies.value.length - 1;
-    featuredMovie.value = slicedMovies.value[lastIndex];
-    currIndex.value = lastIndex;
-    clearInterval(interval);
-    handleChangeFeaturedMovie();
   }
+
+  resetTimer(interval);
 }
 
 function handleChangeMovieRight() {
-  if (!slicedMovies.value) return;
+  if (!slicedMovies.value) {
+    resetTimer(interval);
+    return;
+  }
 
-  if (currIndex.value < slicedMovies.value.length - 1) {
+  if (currIndex.value === slicedMovies.value.length - 1) {
+    currIndex.value = 0;
+    featuredMovie.value = slicedMovies.value?.[0];
+  } else {
     const nextIndex = currIndex.value + 1;
     featuredMovie.value = slicedMovies.value?.[nextIndex];
     currIndex.value = nextIndex;
-    clearInterval(interval);
-    handleChangeFeaturedMovie();
-  } else {
-    currIndex.value = 0;
-    featuredMovie.value = slicedMovies.value?.[0];
-    clearInterval(interval);
-    handleChangeFeaturedMovie();
   }
+
+  resetTimer(interval);
 }
 
 watch(() => props.popularMovies, handleChangeFeaturedMovie);

@@ -15,7 +15,7 @@ import "@/styles/molecul/movieCarousel.molecul.scss";
 
 <template>
   <article class="movie-carousel">
-    <h2 class="movie-carousel__title">{{ title }}</h2>
+    <!-- <h2 class="movie-carousel__title">{{ title }}</h2> -->
 
     <div class="movie-carousel__container">
       <GenreCard :key="genre.id" v-for="genre in data" :genre="genre" />
@@ -25,6 +25,6 @@ import "@/styles/molecul/movieCarousel.molecul.scss";
 
 <style lang="scss" scoped>
 .movie-carousel {
-  margin-bottom: 0 !important;
+  margin-bottom: 1rem !important;
 }
 </style>
