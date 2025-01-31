@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ButtonAtom from "@/components/atoms/Button.atom.vue";
+import ButtonAtom from "../components/atoms/Button.atom.vue";
 import { useGetUser } from "@/infrastructure/mutations/user/useUser";
 import { useFetchRequestToken } from "@/infrastructure/queries/user/useUser";
 import { createElementBlock, onMounted, reactive, watch } from "vue";
