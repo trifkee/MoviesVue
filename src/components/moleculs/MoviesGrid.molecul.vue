@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import {
-  useFetchMoviesWithGenre,
-  useFetchMoviesWithGenresInf,
-} from "@/infrastructure/queries/movies/useFetchMovies";
 import { useRoute } from "vue-router";
-import MovieCardAtom from "../atoms/MovieCard.atom.vue";
 import { computed, onBeforeMount, onMounted, ref, watch } from "vue";
+
+import MovieCardAtom from "../atoms/MovieCard.atom.vue";
 import MovieCardSkeletonAtom from "../atoms/MovieCardSkeleton.atom.vue";
+
+import { useFetchMoviesWithGenresInf } from "@/infrastructure/queries/movies/useFetchMovies";
 
 const route = useRoute();
 const genreId = ref(route.query.genre as string);

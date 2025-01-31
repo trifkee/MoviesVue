@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import ButtonAtom from "../atoms/Button.atom.vue";
+// import ButtonAtom from "@/components/atoms/Button.atom.vue";
 
 import { useFetchTrendingMovies } from "@/infrastructure/queries/movies/useFetchMovies";
 
 import { ChevronRight } from "lucide-vue-next";
 
 import "@/styles/molecul/trendingMovie.molecul.scss";
+import ButtonAtom from "@/components/atoms/Button.atom.vue";
 
 const path = import.meta.env.VITE_TMDB_IMAGE_URL;
 

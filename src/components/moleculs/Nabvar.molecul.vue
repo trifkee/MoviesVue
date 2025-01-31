@@ -37,9 +37,10 @@ const currentRoute = computed(() =>
       <button class="bookmar">
         <Bookmark :size="28" stroke-width="1.5" color="white" />
       </button>
-      <button class="user">
+
+      <RouterLink class="user" to="/login">
         <UserCircle :size="28" stroke-width="1.5" color="white" />
-      </button>
+      </RouterLink>
     </div>
 
     <div class="nav__search">
